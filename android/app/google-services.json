@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "787451719903",
+    "project_id": "messagefast-d9c7c",
+    "storage_bucket": "messagefast-d9c7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787451719903:android:f3f4b365928f0bb6b8796a",
+        "android_client_info": {
+          "package_name": "com.example.messagefast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787451719903-noclto96s7e2eh7m9t50oklmlcnivj9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO1GQeXJfCXUgr88Ek8vH6Uu5hC4vLSaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787451719903-noclto96s7e2eh7m9t50oklmlcnivj9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
