@@ -19,13 +19,14 @@ class FirebaseFireStoreMethods {
         userData["uId"] = uId;
         userData["recievedFriendRequests"] = List<String>.from(userData["recievedFriendRequests"] as List);
         userData["sendedFriendRequests"] = List<String>.from(userData["sendedFriendRequests"] as List);
+        userData["friends"] = List<String>.from(userData["friends"] as List);
 
         return userData;
       }else {
         return null;
       }
     } catch (e) {
-      print("Something went wrong");
+      print("Something went wrong2");
     }
     return null;
   }
@@ -102,6 +103,7 @@ class FirebaseFireStoreMethods {
       try {
         List<UserModel> allFriends = [];
         for (var element in usersUIdList) {
+          print(element);
           var x =await getUserDatas(uId: element);
           if (x != null) {
             allFriends.add(UserModel.fromMap(x));
@@ -110,6 +112,7 @@ class FirebaseFireStoreMethods {
         return allFriends;
       } catch (e) {
       }
+      return null;
     }
 
         /// is a person refuses or accept a friend request this function will effect the database
@@ -126,10 +129,21 @@ class FirebaseFireStoreMethods {
           db.collection("users").doc(clientUId).update({
             "recievedFriendRequests": clientRecievedFriendRequests
           });
-
           db.collection("users").doc(targetUId).update({
             "sendedFriendRequests": targetSendedFriendRequests
           });
+          if (isAccepted) {
+            List<String> targetFriends =  targetUserData["friends"];
+            targetFriends.add(clientUId);
+            List<String> clientFriends = clientUserData["friends"];
+            clientFriends.add(targetUId);
+            db.collection("users").doc(clientUId).update({
+              "friends": clientFriends
+            });
+            db.collection("users").doc(targetUId).update({
+              "friends": targetFriends
+            });
+          }
           
         }
 

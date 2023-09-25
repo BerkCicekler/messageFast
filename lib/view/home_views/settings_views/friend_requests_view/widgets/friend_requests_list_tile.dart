@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:messagefast/view/home_views/settings_views/friend_requests_view/friend_requests_operation.dart';
 
-class friendRequestListTile extends StatelessWidget with FriendRequestsOperation {
+class friendRequestListTile extends ConsumerWidget with FriendRequestsOperation {
   final String name, imageURL, senderUId;
   const friendRequestListTile({super.key, required this.name, required this.imageURL, required this.senderUId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return  ListTile(
       leading: CircleAvatar(
       backgroundImage: NetworkImage(
@@ -16,12 +17,12 @@ class friendRequestListTile extends StatelessWidget with FriendRequestsOperation
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(icon: const Icon(Icons.close), onPressed: () => friendRequestAction(senderUId, false),),
-          IconButton(icon: const Icon(Icons.check), onPressed: () => friendRequestAction(senderUId, true),),
+          IconButton(icon: const Icon(Icons.close), onPressed: () => friendRequestAction(senderUId, false, ref),),
+          IconButton(icon: const Icon(Icons.check), onPressed: () => friendRequestAction(senderUId, true, ref),),
         ],
       ),
       focusColor: Colors.transparent,
       splashColor: Colors.transparent,
     );
   }
-}
+} 

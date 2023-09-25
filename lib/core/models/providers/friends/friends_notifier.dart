@@ -26,13 +26,21 @@ class FriendsNotifier extends StateNotifier<Friends> {
     state.recievedFriendRequests.add(uId);
   }
 
+  void removeFriendsRequestRecieved(String uId) {
+    state.recievedFriendRequests = [];
+    print(state.recievedFriendRequests);
+    state.recievedFriendRequests.remove(uId);
+    print(uId);
+    print(state.recievedFriendRequests);
+    state.recievedFriendRequests = List.from(state.recievedFriendRequests);
+  }
+
   void addAllFriendsRequestsRecieved(List<String>? list) {
     if (list != null) {
       state.recievedFriendRequests = list.toList();
     }else {
       state.recievedFriendRequests = [];
     }
-    
   }
 
 }
