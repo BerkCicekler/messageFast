@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:messagefast/core/models/providers/user/user_provider.dart';
 import 'package:messagefast/core/models/user_model.dart';
+import 'package:messagefast/core/services/firebase/firebase_storage_service.dart';
+import 'package:messagefast/core/utils/image_picker.dart';
+import 'package:messagefast/view/home_views/settings_view/settings_view_operation.dart';
 
 class ProfileHolder extends ConsumerWidget {
   const ProfileHolder({
@@ -25,7 +29,7 @@ class ProfileHolder extends ConsumerWidget {
   }
 }
 
-class _ProfilePictureHolder extends StatelessWidget {
+class _ProfilePictureHolder extends StatelessWidget with SettingsViewOperation {
   final UserModel user;
   const _ProfilePictureHolder({required this.user});
 
@@ -39,7 +43,8 @@ class _ProfilePictureHolder extends StatelessWidget {
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             onPressed: () {
-              Navigator.pop(context);
+                changeProfilePicture(source: ImageSource.camera, name: user.uId);
+                Navigator.pop(context);
             },
             child: Text('Camera',
                 style:
@@ -47,6 +52,7 @@ class _ProfilePictureHolder extends StatelessWidget {
           ),
           CupertinoActionSheetAction(
             onPressed: () {
+              changeProfilePicture(source: ImageSource.gallery, name: user.uId);
               Navigator.pop(context);
             },
             child: Text(

@@ -27,6 +27,7 @@ dependencies:
   cloud_firestore: ^4.9.1
   firebase_auth: ^4.9.0
   firebase_messaging: ^14.6.7
+  firebase_storage: ^11.2.7
   
   # state management
   flutter_riverpod: ^2.3.7
@@ -34,6 +35,9 @@ dependencies:
 
   # router
   auto_route: ^7.8.3
+
+  # utils
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:
