@@ -13,5 +13,10 @@ class UserNotifier extends StateNotifier<UserModel> {
   void logIn(Map<String, dynamic> map) {
     state = UserModel.fromMap(map);
   }
+
+  /// change profilePicture variable
+  void changeProfilePicture(String link) {
+    state = state.copyWith(profilePictureURL: link);
+  }
   
 }

@@ -15,7 +15,7 @@ class ProfileHolder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    UserModel user = ref.read(userProvider);
+    UserModel user = ref.watch(userProvider);
     return Column(
       children: [
         _ProfilePictureHolder(user: user),
@@ -29,11 +29,11 @@ class ProfileHolder extends ConsumerWidget {
   }
 }
 
-class _ProfilePictureHolder extends StatelessWidget with SettingsViewOperation {
+class _ProfilePictureHolder extends ConsumerWidget with SettingsViewOperation {
   final UserModel user;
   const _ProfilePictureHolder({required this.user});
 
-  void _showActionSheet(BuildContext context) {
+  void _showActionSheet(BuildContext context, WidgetRef ref) {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
@@ -43,7 +43,7 @@ class _ProfilePictureHolder extends StatelessWidget with SettingsViewOperation {
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             onPressed: () {
-                changeProfilePicture(source: ImageSource.camera, name: user.uId);
+                changeProfilePicture(source: ImageSource.camera, name: user.uId, ref: ref);
                 Navigator.pop(context);
             },
             child: Text('Camera',
@@ -52,7 +52,7 @@ class _ProfilePictureHolder extends StatelessWidget with SettingsViewOperation {
           ),
           CupertinoActionSheetAction(
             onPressed: () {
-              changeProfilePicture(source: ImageSource.gallery, name: user.uId);
+              changeProfilePicture(source: ImageSource.gallery, name: user.uId, ref: ref);
               Navigator.pop(context);
             },
             child: Text(
@@ -73,7 +73,7 @@ class _ProfilePictureHolder extends StatelessWidget with SettingsViewOperation {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       child: Stack(children: [
         CircleAvatar(
@@ -94,7 +94,7 @@ class _ProfilePictureHolder extends StatelessWidget with SettingsViewOperation {
               
             ))
       ]),
-      onTap: () => _showActionSheet(context),
+      onTap: () => _showActionSheet(context, ref),
     );
   }
 }

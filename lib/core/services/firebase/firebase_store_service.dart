@@ -60,6 +60,18 @@ class FirebaseFireStoreMethods {
     }
   }
 
+    /// This function is specially created for searching users
+  Future<void> updateUsersOneValue(String index, String value) async{
+    try {
+      if (FirebaseAuth.instance.currentUser != null) {
+        db.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).update({index: value});
+      }
+      
+    } catch (e) {
+
+    }
+  }
+
   /// third argument is user's sended friend requests
   Future<bool> sendFriendRequest({required String senderId, required String targetId, required List<String> usersSendedFriendRequestsList}) async{
     try {
